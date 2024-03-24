@@ -21,9 +21,13 @@
 
 В браузере открыть `http://localhost:5173`
 
+
 #### Основные роуты
 
-Страница кинозала: `http://localhost:5173`
-Административная панель: `http://localhost:5173/admin`
-Страница регистрации: `http://localhost:5173/register`
-Страница авторизации: `http://localhost:5173/login`
+Страница кинозала: [`http://localhost:5173`](http://localhost:5173)
+
+Административная панель: [`http://localhost:5173/admin`](http://localhost:5173/admin)
+
+Страница регистрации: [`http://localhost:5173/register`](http://localhost:5173/register)
+
+Страница авторизации: [`http://localhost:5173/login`](http://localhost:5173/login)
