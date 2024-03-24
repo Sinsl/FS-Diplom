@@ -2,6 +2,7 @@ import './admin.css';
 import { ControlHalls } from './section/control/ControlHalls';
 import { ConfigHalls } from './section/config/ConfigHalls';
 import { ConfigPrice } from './section/price/ConfigPrice';
+import { SeanсeGrid } from './section/seance/SeanсeGrid';
 
 
 export const Main = () => {
@@ -17,6 +18,7 @@ export const Main = () => {
                 <ControlHalls />
                 <ConfigHalls />
                 <ConfigPrice />
+                <SeanсeGrid/>
             </main>
         </div>
     )

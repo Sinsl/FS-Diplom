@@ -15,8 +15,10 @@ export interface FilmType {
     url_img: string,
     duration: number,
     country: string,
-    created_at: string,
-    updated_at: string
+    bg_color: string,
+    isNew?: boolean,
+    created_at?: string,
+    updated_at?: string
 }
 
 export interface FilmProps {

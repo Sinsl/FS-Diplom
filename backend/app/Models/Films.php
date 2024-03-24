@@ -10,7 +10,7 @@ class Films extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'description', 'url_img', 'duration', 'country'
+        'title', 'description', 'url_img', 'duration', 'country', 'bg_color'
     ];
 
     public function movies() {

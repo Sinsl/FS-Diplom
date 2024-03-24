@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('url_img');
             $table->integer('duration')->nullable();
             $table->string('country', 50)->nullable();
+            $table->string('bg_color', 30)->default('#caff85');
             $table->timestamps();
         });
     }

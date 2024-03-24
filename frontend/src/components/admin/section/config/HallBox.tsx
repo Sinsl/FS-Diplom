@@ -1,6 +1,6 @@
-import { useEffect, useState, SyntheticEvent, ChangeEvent } from "react";
+import { useEffect, useState, ChangeEvent } from "react";
 import { requests } from "../../requests";
-import { Movies, Seats, CategorySeats, SeatsAdmin, ObjSeatsCat, Ticket } from "../../../../types/types";
+import {  Seats, CategorySeats, SeatsAdmin } from "../../../../types/types";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from '../../redux/store/store';
 import { Seat } from "./Seat";
@@ -118,8 +118,6 @@ export const HallBox = ({hallId}: HallBoxProps) => {
 
     const onApplyHall = () => {
         const hall = halls.find(item => item.id === hallId);
-        // const deffRow = hall ? size.row - hall.rows : 0;
-        // const deffSeats = hall ? size.seats - hall.count_seat : 0;
         const deffRow = seats ? size.row - seats.length : 0;
         const deffSeats = seats ? size.seats - seats[0].length : 0;
 

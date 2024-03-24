@@ -21,6 +21,19 @@ export const ConfigPrice = () => {
         dispatch(changeSelect(id))
     }
 
+    const getCat = async () => {
+        const response = await requests('get', `/admin/hall/${selectHall}/cat-seats`, null);
+        if (response && response.data) {
+            const data: CategorySeats[] = response.data;
+            const simple = data.find(item => item.title === 'simple') as CategorySeats;
+            const vip = data.find(item => item.title === 'vip') as CategorySeats;
+            if (simple && vip) {
+                setValueInputs({simple: simple.price, vip: vip.price })
+            }
+            
+        }
+    }
+
     useEffect(() => {
         if (isOpen) {
             if (halls.length === 0) {
@@ -36,32 +49,28 @@ export const ConfigPrice = () => {
     }, [halls])
 
     useEffect(() => {
-        const getCat = async () => {
-            const response = await requests('get', `/admin/hall/${selectHall}/cat-seats`, null);
-            if (response && response.data) {
-                const data: CategorySeats[] = response.data;
-                console.log(response)
-                const simple = data.find(item => item.title === 'simple') as CategorySeats;
-                const vip = data.find(item => item.title === 'vip') as CategorySeats;
-                if (simple && vip) {
-                    setValueInputs({simple: simple.price, vip: vip.price })
-                }
-                
-            }
-        }
         if (selectHall !== 0) {
             getCat();
         }
     }, [selectHall])
 
     const changeInputsHandler = (name: string, value: string) => {
-        console.log(name, value);
         const valueInputs = value.trim() === '' ? '0' : value.trim();
         if(!isNaN(parseInt(valueInputs))) {
             setValueInputs(prev => ({ ...prev, [name]: parseInt(valueInputs) }));
         }
         
 
+    }
+
+    const onSave = async () => {
+        const response = await requests('put', `/admin/hall/cat-seats/update`, {hallId: selectHall, price: valueInputs});
+        if (response) {
+            if(response.data && response.data.records_update > 0) {
+                await dispatch(fetchHalls());
+                getCat();
+            }
+        }
     }
 
 
@@ -92,8 +101,8 @@ export const ConfigPrice = () => {
                 <PriceForm valuesInputs={valueInputs} changeInputs={changeInputsHandler}/>           
         
                 <fieldset className="conf-step__buttons text-center">
-                    <button className="conf-step__button conf-step__button-regular">Отмена</button>
-                    <input type="submit" value="Сохранить" className="conf-step__button conf-step__button-accent"/>
+                    <button className="conf-step__button conf-step__button-regular" onClick={getCat}>Отмена</button>
+                    <input type="button" value="Сохранить" className="conf-step__button conf-step__button-accent" onClick={onSave}/>
                 </fieldset>  
             </div>
         </section>

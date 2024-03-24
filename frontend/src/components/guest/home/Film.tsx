@@ -6,7 +6,9 @@ export const Film = ({ data }: FilmProps ) => {
         <section className="movie">
             <div className="movie__info">
                 <div className="movie__poster">
-                    <img className="movie__poster-image" alt="Звёздные войны постер" src={import.meta.env.VITE_BACKEND_URL + '/' + data.url_img} />
+                    <img className="movie__poster-image" alt="Звёздные войны постер" 
+                        src={data.url_img.slice(0, 4) === 'http' ? data.url_img : import.meta.env.VITE_BACKEND_URL + '/' + data.url_img} 
+                    />
                 </div>
                 <div className="movie__description">
                     <h2 className="movie__title">{data.title}</h2>

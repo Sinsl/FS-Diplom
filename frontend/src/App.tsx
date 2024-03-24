@@ -9,6 +9,8 @@ import { Main } from './components/admin/Main';
 import { Provider } from 'react-redux';
 import { store as guestStore } from './components/guest/redux/store/store';
 import { store as adminStore } from './components/admin/redux/store/store';
+import { Register } from './components/auth/Register';
+import { Login } from './components/auth/Login';
 
 function App() {
 
@@ -26,8 +28,10 @@ function App() {
             </Routes> 
             </Provider>
             <Provider store={adminStore}>
-            <Routes>
-                <Route path='admin' element={<Main />}/>
+                <Routes>
+                    <Route path='admin' element={<Main />}/>
+                    <Route path='login' element={<Login />}/>
+                    <Route path='register' element={<Register />}/>
                 </Routes> 
             </Provider>   
         
