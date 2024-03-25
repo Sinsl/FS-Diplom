@@ -9,15 +9,13 @@ import { Main } from './components/admin/Main';
 import { Provider } from 'react-redux';
 import { store as guestStore } from './components/guest/redux/store/store';
 import { store as adminStore } from './components/admin/redux/store/store';
-import { Register } from './components/auth/Register';
-import { Login } from './components/auth/Login';
+import { Auth } from './components/auth/Auth';
 
 function App() {
 
   return (
-    <>    
-        
-            <Provider store={guestStore}>
+    <> 
+        <Provider store={guestStore}>
             <Routes>
                 <Route path='/' element={<Header />}>            
                     <Route path='' element={<Home />}/>
@@ -26,15 +24,13 @@ function App() {
                     <Route path='ticket/:id' element={<Ticket />}/>
                 </Route>
             </Routes> 
-            </Provider>
-            <Provider store={adminStore}>
-                <Routes>
-                    <Route path='admin' element={<Main />}/>
-                    <Route path='login' element={<Login />}/>
-                    <Route path='register' element={<Register />}/>
-                </Routes> 
-            </Provider>   
-        
+        </Provider>
+        <Provider store={adminStore}>
+            <Routes>
+                <Route path='admin' element={<Main />}/>
+                <Route path='auth' element={<Auth />}/>
+            </Routes> 
+        </Provider>
     </>
   )
 }

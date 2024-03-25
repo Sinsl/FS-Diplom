@@ -12,21 +12,21 @@ class AuthController extends Controller
 {
     public function register(Request $request) {
         $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'string', 'min:6'],
-            'devace_name' => ['required', 'string']
+            'device_name' => ['required', 'string']
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['err' => $validator->errors()], 401);
+            return response()->json(['error' => $validator->errors()], 401);
         }
 
-        $user = User::where('email', $request->email)->first();
+        $input = $request->all();
+        $input['password'] = bcrypt($input['password']);
+        $user = User::create($input);
 
-        if(!$user || !Hash::check($request->password, $user->password)) {
-            return response()->json(['error' => 'Ошибка аутентификации'], 401);
-        }
-        return response()->json(['token' => $user->createToken($request->device_name)->plainTextToken]);
+        return response('ok', 200);
 
     }
 
@@ -34,7 +34,7 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'string', 'min:6'],
-            'devace_name' => ['required', 'string']
+            'device_name' => ['required', 'string']
         ]);
 
         if ($validator->fails()) {

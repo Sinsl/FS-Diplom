@@ -15,6 +15,15 @@ use URL;
 
 class AdminController extends Controller
 {
+    public function getUser(Request $request) {
+        $user = $request->user();
+        return response()->json(['name' => $user->name]);
+    }
+
+    public function userLogout(Request $request) {
+        $request->user()->currentAccessToken()->delete();
+        return response('ok', 200);
+    }
     public function getHalls()
     {
         $halls = Halls::all();
@@ -54,6 +63,7 @@ class AdminController extends Controller
         
         return response('', 200);
     }
+    
     public function getSeatsHall($id)
     {
         $seats = Seats::where('halls_id', $id)->get();

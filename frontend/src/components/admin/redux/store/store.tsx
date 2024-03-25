@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import getHallsReduser from "../slices/getHallsSlice";
-import selectedHallReduser from "../slices/selectedHallSlice"
+import selectedHallReduser from "../slices/selectedHallSlice";
+import authReduser from "../slices/authSlice";
 
 export const store = configureStore({
   reducer: {
     halls: getHallsReduser,
-    selectHall: selectedHallReduser
+    selectHall: selectedHallReduser,
+    auth: authReduser
   },
   middleware: (getDefaultMiddleware) => 
   getDefaultMiddleware({

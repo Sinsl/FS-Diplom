@@ -15,5 +15,6 @@ class VerifyCsrfToken extends Middleware
         '/api/qr-codes',
         '/api/ticket/create',
         '/api/admin/*',
+        '/api/sunctum/*'
     ];
 }

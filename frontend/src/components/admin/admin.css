@@ -18,7 +18,10 @@ html {
   font-family: "Roboto", sans-serif;
   font-size: 62.5%; }
 
-body {
+body:has(.admin),
+body:has(.auth) {
+    width: 100%;
+    height: 100vh;
   background-image: url("../../assets/admin/background.jpg");
   background-color: rgba(0, 0, 0, 0.5);
   background-blend-mode: multiply;
@@ -42,6 +45,26 @@ input[type='radio'], input[type='submit'], button, .conf-step__header, select {
 .page-header {
   color: #FFFFFF;
   text-transform: uppercase; }
+.page-header.admin {
+    display: flex;
+    justify-content: space-between;
+}
+.page-header__user {
+    font-size: 1.5em;
+}
+.page-header__user span {
+    margin-left: 20px;
+}
+.page-header__user .logout {
+    /* text-decoration: underline; */
+    border-bottom: 1px solid white;
+}
+.page-header__user .logout:hover {
+    /* text-decoration: underline; */
+    color: #2FC9D2;
+    border-color: #2FC9D2;
+    cursor: pointer;
+}
   .page-header .page-header__title {
     margin: 0;
     font-weight: 900;
@@ -500,17 +523,44 @@ input[type='radio'], input[type='submit'], button, .conf-step__header, select {
   position: relative;
   background-color: rgba(234, 233, 235, 0.95); }
   .login__wrapper {
-    padding: 35px 104px; }
+    padding: 35px 104px;
+}
+.login__wrapper .login__button {
+    width: 230px;
+}
   .login__header {
     position: relative;
     box-sizing: border-box;
-    padding: 16px 104px;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
     background-color: #63536C;
     color: #FFFFFF; }
+.login__form {
+    width: 100%;
+    height: 180px;
+}
+.msg-auth {
+    width: 100%;
+    text-align: center;
+    padding-bottom: 20px;
+    font-size: 1.5em;
+    color: #008000;
+    height: 40px;
+}
   .login__title {
+    width: 50%;
+    cursor: pointer;
+    padding: 20px;
     font-size: 2.2rem;
     font-weight: 700;
+    color: #b7b7b7;
+    text-align: center;
     text-transform: uppercase; }
+.login__title.active {
+    background-color: rgba(234, 233, 235, 0.95);
+    color: #63536C;
+}
   .login__label {
     width: 100%;
     margin-bottom: 0.8rem; }
@@ -518,6 +568,8 @@ input[type='radio'], input[type='submit'], button, .conf-step__header, select {
       margin-bottom: 0; }
   .login__input {
     width: 100%; }
+
+
 
 .popup {
   display: none;
