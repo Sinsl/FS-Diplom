@@ -28,6 +28,6 @@
 
 Административная панель: [`http://localhost:5173/admin`](http://localhost:5173/admin)
 
-Страница регистрации: [`http://localhost:5173/register`](http://localhost:5173/register)
+Страница авторизации: [`http://localhost:5173/auth`](http://localhost:5173/auth)
 
-Страница авторизации: [`http://localhost:5173/login`](http://localhost:5173/login)
+Пользователей в миграции нет, предусмотрена регистрация.
