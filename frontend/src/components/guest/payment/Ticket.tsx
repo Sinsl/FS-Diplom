@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { MadeTicket } from "../../types/types";
+import { MadeTicket } from "../../../types/types";
 
 export const Ticket = () => {
     const { id } = useParams();

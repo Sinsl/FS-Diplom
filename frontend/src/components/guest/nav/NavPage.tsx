@@ -12,7 +12,7 @@ export const NavPage = () => {
     const dispatch = useDispatch();
     let size = 6;
     const [arrDate, setArrDate] = useState<ElemDateType[]>([]);
-    const [startDate, setStartDay] = useState(Date.now());
+    const [startDate, setStartDay] = useState(0);
 
 
     const renderDate = () => {
@@ -40,6 +40,9 @@ export const NavPage = () => {
     }
 
     useEffect(() => {
+        if (startDate === 0) {
+            setStartDay(Date.now())
+        }
         renderDate();
     }, [selectedDay, startDate])
 

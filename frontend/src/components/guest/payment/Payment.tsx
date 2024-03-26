@@ -1,8 +1,8 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import './payment.css';
-import { StatePayment } from "../../types/types";
+import { StatePayment } from "../../../types/types";
 import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store/store";
+import { RootState } from "../redux/store/store";
 
 interface DataRequest {
     movieId: number,
