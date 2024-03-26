@@ -32,7 +32,7 @@ class ApiController extends Controller
         $movies = Movies::join('halls', 'halls.id', '=', 'movies.halls_id')
                 ->where('movies.films_id', $film_id)
                 ->where('movies.date', $date_params)
-                ->get(['movies.*', 'halls.title']);
+                ->get(['movies.*', 'halls.title', 'halls.is_open']);
         return response()->json($movies);
     }
 

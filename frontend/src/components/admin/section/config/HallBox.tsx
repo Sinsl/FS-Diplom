@@ -15,6 +15,7 @@ export const HallBox = ({hallId}: HallBoxProps) => {
     const [catSeats, setCatSeats] = useState<CategorySeats[] | null>(null);
     const {halls, loading, error} = useSelector((state: RootState) => state.halls);
     const [size, setSize] = useState({row: 0, seats: 0});
+    const [isSave, setIsSave] = useState(false);
     const dispatch: AppDispatch = useDispatch();
 
     const getSeats = async () => {
@@ -108,18 +109,21 @@ export const HallBox = ({hallId}: HallBoxProps) => {
     }
 
     const onChangeHall = (e: ChangeEvent<HTMLInputElement>) => {
+        setIsSave(true);
         let {name, value} = e.target;
         value = value.trim() === '' ? '0' : value.trim();
         if(!isNaN(parseInt(value))) {
             setSize((prev) => ({...prev, [name]: parseInt(value)}))
-        }
-        
+        }        
     }
 
     const onApplyHall = () => {
+        setIsSave(false);
         const hall = halls.find(item => item.id === hallId);
         const deffRow = seats ? size.row - seats.length : 0;
         const deffSeats = seats ? size.seats - seats[0].length : 0;
+        // console.log('deff row: ', hall?.rows, seats?.length, size.row, deffRow)
+        // console.log('deff row: ', hall?.count_seat, seats[0].length, size.seats, deffSeats)
 
         const tempArr = seats && seats.map(row => row.map(seat => seat));
         const cat = catSeats?.find(item => item.title === 'simple');
@@ -134,7 +138,7 @@ export const HallBox = ({hallId}: HallBoxProps) => {
             const counter = deffSeats * -1;
             tempArr && tempArr.forEach(row => row.forEach((seat, idx) => {
                 (idx >= row.length - counter) ? seat.isDel = true : seat.isDel = !!seat.isDel
-            }))            
+            }))           
         }
 
         if (hall && deffRow >= 0) {
@@ -145,18 +149,14 @@ export const HallBox = ({hallId}: HallBoxProps) => {
                 let counterRow = 0;
                 while (counterRow < deffRow) {
                     let counterSeats = 0;
-                    console.log('len', tempArr?.length)
-                    console.log('row', hall.rows, counterRow)
-                    console.log('sum', hall.rows + counterRow )
                     const tempSeats: SeatsAdmin[] = [];
                     while(counterSeats < size.seats) {
-                        console.log('seat', counterSeats + 1)
                         tempSeats.push({
                             active: true, 
                             category_seats_id: cat.id,
                             halls_id: hall.id,
                             id: ((hall.rows + counterRow) * 10 + counterSeats) * -1,
-                            row: hall.rows + counterRow,
+                            row: hall.rows + 1 + counterRow,
                             seat: counterSeats + 1,
                             category_seats: cat,
                             isChange: false,
@@ -174,8 +174,8 @@ export const HallBox = ({hallId}: HallBoxProps) => {
         if (hall && deffSeats > 0) {
             if (cat) {
                 tempArr && tempArr.forEach((row, idx) => {
-                    let counterSeats = 0;
                     if (row.length < size.seats) {
+                        let counterSeats = 0;
                         while(counterSeats < deffSeats) {
                             row.push({
                                 active: true, 
@@ -183,7 +183,7 @@ export const HallBox = ({hallId}: HallBoxProps) => {
                                 halls_id: hall.id,
                                 id: ((idx + 1) * 10 + row.length + counterSeats + 1) * -1,
                                 row: idx + 1,
-                                seat: row.length + counterSeats + 1,
+                                seat: row.length + 1,
                                 category_seats: cat,
                                 isChange: false,
                                 isNew: true,
@@ -196,6 +196,7 @@ export const HallBox = ({hallId}: HallBoxProps) => {
                 })
             }
         }
+        // console.log([...tempArr])
         setSeats(tempArr);
     }
 
@@ -230,6 +231,7 @@ export const HallBox = ({hallId}: HallBoxProps) => {
                     <input type="text" className="conf-step__input" name="seats" value={size.seats} onChange={onChangeHall}/>
                 </label>
                 <input type="button" value="Применить" className="conf-step__button conf-step__button-accent btn-change-seets" onClick={onApplyHall}/>
+                {isSave && <span className="conf-step__msg">Примените изменения!</span>}
             </div>
 
             <p className="conf-step__paragraph">Теперь вы можете указать типы кресел на схеме зала:</p>
@@ -258,7 +260,7 @@ export const HallBox = ({hallId}: HallBoxProps) => {
         
         <fieldset className="conf-step__buttons text-center">
           <button className="conf-step__button conf-step__button-regular">Отмена</button>
-          <input type="button" value="Сохранить" className="conf-step__button conf-step__button-accent" onClick={onSave}/>
+          <input type="button" value="Сохранить" className="conf-step__button conf-step__button-accent" onClick={onSave} disabled={isSave}/>
         </fieldset>   
         </>
     )

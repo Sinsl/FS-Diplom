@@ -28,6 +28,7 @@ Route::prefix('api')->group(function() {
 
         Route::get('user', [\App\Http\Controllers\AdminController::class, 'getUser']);    
         Route::get('halls', [\App\Http\Controllers\AdminController::class, 'getHalls']);
+        Route::put('halls/change-open', [\App\Http\Controllers\AdminController::class, 'updateOpen']);
         Route::get('films', [\App\Http\Controllers\AdminController::class, 'getFilms']);
         
         Route::post('create/hall', [\App\Http\Controllers\AdminController::class, 'createHall']);

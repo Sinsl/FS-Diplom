@@ -36,6 +36,7 @@ export interface Movies {
     id: number,
     start_time: string,
     title: string,
+    is_open?: number,
     updated_at: string,
     films?: FilmType,
     halls?: Halls
@@ -44,6 +45,7 @@ export interface Movies {
 export interface StateMovies {
     hallId: number,
     hallTitle: string,
+    hallOpen: boolean,
     movieArr: Movies[]
 }
 

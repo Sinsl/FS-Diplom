@@ -48,7 +48,6 @@ export const Hall = () => {
                 const resp1 = await fetch(import.meta.env.VITE_BACKEND_URL + '/api/movie/' + movie.id +'/tickets');
                 if (resp1.ok) {
                     const data1: Ticket[] = await resp1.json();
-                    console.log(data1)
                     const tempSeatId: number[] = [];
                     data1.forEach(item => {
                         if (item.ticket_seats && item.ticket_seats.length) {

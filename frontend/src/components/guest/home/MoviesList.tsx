@@ -28,6 +28,7 @@ export const MoviesList = ({ filmsId }: MoviesListProps) => {
                             tempArr.push({
                                 hallId: movie.halls_id,
                                 hallTitle: movie.title,
+                                hallOpen: movie.is_open ? true : false,
                                 movieArr: [movie]
                             })
                         }
@@ -37,8 +38,6 @@ export const MoviesList = ({ filmsId }: MoviesListProps) => {
             }
         })()
     }, [])
-
-    console.log(movies);
 
     return (
         <>

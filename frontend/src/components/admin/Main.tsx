@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { changeAuth } from "../admin/redux/slices/authSlice";
 import { useNavigate } from 'react-router-dom';
 import { requests } from './requests';
+import { OpenSales } from './section/open-sales/OpenSales';
 
 
 export const Main = () => {
@@ -61,7 +62,8 @@ export const Main = () => {
                 <ControlHalls />
                 <ConfigHalls />
                 <ConfigPrice />
-                <SeanсeGrid/>
+                <SeanсeGrid />
+                <OpenSales />
             </main>
         </>
     )

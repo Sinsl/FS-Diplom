@@ -30,6 +30,12 @@ class AdminController extends Controller
         sleep(2);
         return response()->json($halls);
     }
+
+    public function updateOpen(Request $request) {
+        $is_open = $request->all();
+        $halls = Halls::query()->update(['is_open' => $is_open['is_open']]);
+        return response()->json(['count_update' => $halls]);
+    }
     
     public function createHall(Request $request)
     {

@@ -300,7 +300,10 @@ input[type='radio'], input[type='submit'], button, .conf-step__header, select {
   .conf-step__input:focus, .login__input:focus {
     outline: 1px #CF87FF solid;
     outline-offset: -1px; }
-
+.conf-step__msg {
+    margin-left: 20px;
+    color: red;
+}
 .conf-step__chair {
   display: inline-block;
   vertical-align: middle;
