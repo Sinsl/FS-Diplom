@@ -7,8 +7,11 @@
 ### Бэкенд
 
 - открыть ide на папке backend
+- выполнить команду `composer install`
+- переименовать файл .env.exemple в .env
 - скопировать полный путь к БД файла ./database/database.sqlite
-- вставить скопированный путь в файле .env.exemple (для windows оставить как есть)
+- вставить скопированный путь в файле .env (для windows оставить как есть)
+- выполнить команду `php artisan key:generate`
 - выполнить миграции, команда: `php artisan migrate:fresh --seed`
 - запустить бэкенд, команда: `php artisan serve`
 
